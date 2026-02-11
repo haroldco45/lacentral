@@ -3,26 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LA CENTRAL - Pedidos Inteligentes</title>
+    <title>LA CENTRAL - Pedidos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2e7d32;
-            --primary-light: #4caf50;
             --secondary: #fdd835;
             --accent: #ff9800;
-            --white: #ffffff;
-            --gray: #f4f7f6;
+            --bg: #f8f9fa;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-color: var(--gray);
+            background-color: var(--bg);
             padding-bottom: 140px;
         }
 
-        /* --- LOGO --- */
+        /* --- HEADER Y LOGO --- */
         .header-logo {
             background: white;
             padding: 25px 10px;
@@ -44,17 +42,42 @@
 
         .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
 
-        .card {
-            background: var(--white);
+        /* --- SECCIÓN DATOS CLIENTE --- */
+        .client-card {
+            background: white;
             border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
         }
 
-        .reloj { color: var(--primary); font-weight: 600; text-align: right; font-size: 0.9em; margin-bottom: 10px; }
+        .reloj { color: var(--primary); font-weight: 600; text-align: right; font-size: 0.9em; margin-bottom: 15px; }
 
-        /* --- PRODUCTOS --- */
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .input-group { grid-template-columns: 1fr; }
+        }
+
+        .field { position: relative; }
+        .field label { font-size: 0.8em; font-weight: 600; color: #666; margin-bottom: 5px; display: block; }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--primary); outline: none; }
+
+        /* --- GRILLA PRODUCTOS --- */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -63,68 +86,73 @@
 
         .product-card {
             background: white;
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 15px;
+            padding: 15px;
             text-align: center;
             border: 1px solid #eee;
             transition: 0.3s;
         }
 
-        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--primary); }
 
-        .img-container {
+        .img-box {
             width: 100%;
-            height: 120px;
+            height: 130px;
+            background: #fdfdfd;
+            border-radius: 10px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f9f9f9;
-            border-radius: 8px;
-            margin-bottom: 8px;
             overflow: hidden;
         }
 
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        .product-name { font-size: 0.85em; font-weight: 600; height: 35px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .product-price { color: var(--primary); font-weight: 900; font-size: 1.1em; margin: 5px 0; }
+        .product-name { font-size: 0.9em; font-weight: 600; color: #333; height: 35px; line-height: 1.2; }
+        .product-price { color: var(--primary); font-weight: 900; font-size: 1.1em; margin: 8px 0; }
 
-        .cant-input {
-            width: 90%;
+        .qty-input {
+            width: 80%;
             text-align: center;
+            background: #f4f4f4;
+            border: none;
             font-weight: 900;
-            border: 2px solid var(--gray);
-            border-radius: 8px;
-            padding: 5px;
+            color: var(--primary);
         }
 
-        /* --- LIQUIDACIÓN --- */
+        /* --- LIQUIDACIÓN FLOTANTE --- */
         .drawer {
             position: fixed;
             bottom: 0; left: 0; right: 0;
             background: var(--primary);
             color: white;
-            padding: 15px 30px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            border-radius: 25px 25px 0 0;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
         }
 
-        .total-amount { font-size: 2.2em; font-weight: 900; }
+        .total-amount { font-size: 2.5em; font-weight: 900; letter-spacing: -1px; }
 
-        .btn-send {
+        .btn-whatsapp {
             background: var(--secondary);
             color: #333;
             border: none;
-            padding: 15px 30px;
-            border-radius: 12px;
+            padding: 15px 35px;
+            border-radius: 15px;
             font-weight: 900;
+            font-size: 1.1em;
             cursor: pointer;
+            box-shadow: 0 4px 0 #d4b400;
         }
 
-        footer { text-align: center; padding: 20px; font-size: 0.8em; color: #888; }
+        .btn-whatsapp:active { transform: translateY(3px); box-shadow: none; }
+
+        footer { text-align: center; padding: 25px; font-size: 0.8em; color: #999; }
     </style>
 </head>
 <body>
@@ -137,27 +165,43 @@
 </header>
 
 <div class="container">
-    <div class="card">
+    <div class="client-card">
         <div id="reloj" class="reloj">Colombia: --:--:--</div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <input type="text" id="nombre" placeholder="Nombre Completo">
-            <input type="text" id="direccion" placeholder="Dirección en Caucasia">
+        
+        <div class="input-group">
+            <div class="field">
+                <label>👤 Nombre del Cliente</label>
+                <input type="text" id="nombre" placeholder="¿A quién entregamos?">
+            </div>
+            <div class="field">
+                <label>📍 Dirección en Caucasia</label>
+                <input type="text" id="direccion" placeholder="Ej: Barrio Centro Calle 10">
+            </div>
+            <div class="field">
+                <label>📱 Celular / WhatsApp</label>
+                <input type="tel" id="celular" placeholder="Número de contacto">
+            </div>
+        </div>
+        
+        <div style="margin-top: 15px; font-size: 0.8em; color: var(--primary); font-weight: 600;">
+            🏢 Central: Frente al estadio de fútbol | 📞 3148648770
         </div>
     </div>
 
     <div class="product-grid" id="grid"></div>
 
-    <div class="card" style="margin-top: 20px;">
-        <textarea id="obs" placeholder="Observaciones del pedido..." style="width:100%; height:80px; padding:10px; border-radius:10px; border:1px solid #ddd;"></textarea>
+    <div class="client-card" style="margin-top: 25px;">
+        <label style="font-weight: 600; color: #666;">📝 Observaciones Adicionales</label>
+        <textarea id="obs" placeholder="Ej: Los aguacates que no estén muy maduros..." style="margin-top:8px; height:80px;"></textarea>
     </div>
 </div>
 
 <div class="drawer">
     <div>
-        <p style="margin:0; font-size:0.8em; opacity:0.8;">TOTAL PEDIDO</p>
+        <p style="margin:0; font-size:0.8em; font-weight:600; opacity:0.9;">VALOR TOTAL PEDIDO</p>
         <div class="total-amount">$<span id="total-text">0</span></div>
     </div>
-    <button class="btn-send" onclick="enviarPedido()">ENVIAR WHATSAPP 🚀</button>
+    <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP 🚀</button>
 </div>
 
 <footer>
@@ -165,20 +209,20 @@
 </footer>
 
 <script>
-    // --- SUSCRIPCIÓN ---
+    // --- CONTROL DE VENCIMIENTO ---
     const _expire = new Date(2027, 0, 1);
-    if (new Date() > _expire) document.body.innerHTML = "<h2 style='text-align:center;'>Suscripción Expirada</h2>";
+    if (new Date() > _expire) document.body.innerHTML = "<div style='text-align:center;padding:100px;'><h2>Suscripción Expirada</h2><p>Contacte a Soporte Técnico.</p></div>";
 
-    // --- CATÁLOGO (Fotos actualizadas) ---
+    // --- CATÁLOGO DE PRODUCTOS (Agraz y Ajo vinculados) ---
     const catalog = [
         { n: "Ajo Kilo", p: 9580, img: "ajo.JPG" },
         { n: "Agraz", p: 4500, img: "agraz.JPG" },
         { n: "Aguacate Hass", p: 7980, img: "aguacate_hass.jpg" },
         { n: "Cebolla Roja", p: 5380, img: "cebolla_roja.jpg" },
+        { n: "Papa Capira", p: 3780, img: "papa.jpg" },
         { n: "Mora", p: 3700, img: "mora.jpg" },
-        { n: "Papa Capira", p: 3780, img: "papa_capira.jpg" },
-        { n: "Arroz Blanco", p: 2100, img: "arroz.jpg" },
-        { n: "Huevos Doble A", p: 17900, img: "huevos.jpg" }
+        { n: "Arroz Superarroz", p: 2100, img: "arroz.jpg" },
+        { n: "Huevo Doble A", p: 17900, img: "huevos.jpg" }
     ];
 
     const grid = document.getElementById('grid');
@@ -186,12 +230,12 @@
     catalog.forEach((item, index) => {
         grid.innerHTML += `
             <div class="product-card">
-                <div class="img-container">
-                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Sin+Foto'">
+                <div class="img-box">
+                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=${item.n}'">
                 </div>
                 <div class="product-name">${item.n}</div>
                 <div class="product-price">$${item.p.toLocaleString()}</div>
-                <input type="number" min="0" placeholder="0" class="cant-input" 
+                <input type="number" min="0" placeholder="0" class="qty-input" 
                        data-index="${index}" oninput="liquidar()">
             </div>
         `;
@@ -199,7 +243,7 @@
 
     function liquidar() {
         let total = 0;
-        document.querySelectorAll('.cant-input').forEach(input => {
+        document.querySelectorAll('.qty-input').forEach(input => {
             total += (parseInt(input.value) || 0) * catalog[input.dataset.index].p;
         });
         document.getElementById('total-text').innerText = total.toLocaleString();
@@ -215,12 +259,14 @@
     function enviarPedido() {
         const nombre = document.getElementById('nombre').value;
         const dir = document.getElementById('direccion').value;
-        if (!nombre || !dir) return alert("Ingresa nombre y dirección.");
+        const cel = document.getElementById('celular').value;
+        
+        if (!nombre || !dir) return alert("Por favor, completa los datos de entrega.");
 
-        let factura = `🧾 *LA CENTRAL - PEDIDO*\n👤 *Cliente:* ${nombre}\n📍 *Dir:* ${dir}\n\n🛒 *PRODUCTOS:*\n`;
+        let factura = `🧾 *LA CENTRAL - NUEVO PEDIDO*\n--------------------------\n👤 *Cliente:* ${nombre}\n📍 *Dir:* ${dir}\n📱 *Tel:* ${cel}\n📅 ${document.getElementById('reloj').innerText}\n\n🛒 *PRODUCTOS:*\n`;
         let totalFinal = 0;
 
-        document.querySelectorAll('.cant-input').forEach(input => {
+        document.querySelectorAll('.qty-input').forEach(input => {
             const cant = parseInt(input.value) || 0;
             if (cant > 0) {
                 const item = catalog[input.dataset.index];
@@ -229,9 +275,9 @@
             }
         });
 
-        if (totalFinal === 0) return alert("Carrito vacío.");
-        factura += `\n💰 *TOTAL: $${totalFinal.toLocaleString()}*`;
-        
+        if (totalFinal === 0) return alert("El pedido está vacío.");
+        factura += `\n💰 *TOTAL A PAGAR: $${totalFinal.toLocaleString()}*\n--------------------------\n📝 *OBS:* ${document.getElementById('obs').value || 'Ninguna'}\n\n_Desarrollado por vibras positivas_`;
+
         window.open(`https://wa.me/573148648770?text=${encodeURIComponent(factura)}`);
     }
 </script>
