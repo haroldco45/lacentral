@@ -20,7 +20,6 @@
             padding-bottom: 140px;
         }
 
-        /* --- HEADER --- */
         header {
             background: white;
             padding: 20px;
@@ -32,8 +31,6 @@
         .logo-img {
             max-width: 280px;
             height: auto;
-            display: block;
-            margin: 0 auto;
         }
 
         .container {
@@ -42,7 +39,6 @@
             padding: 0 15px;
         }
 
-        /* --- DATOS CLIENTE --- */
         .card {
             background: white;
             border-radius: 15px;
@@ -57,16 +53,6 @@
             text-align: right;
             font-size: 0.9em;
             margin-bottom: 15px;
-        }
-
-        .info-central {
-            background: #e8f5e9;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.85em;
-            color: #333;
-            border-left: 5px solid var(--primary);
         }
 
         .client-inputs {
@@ -94,53 +80,43 @@
             border: 2px solid #eee;
             border-radius: 10px;
             font-family: 'Poppins', sans-serif;
-            font-size: 0.9em;
             box-sizing: border-box;
         }
 
         input:focus { border-color: var(--primary); outline: none; }
 
-        /* --- GRILLA PRODUCTOS --- */
+        h3 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 15px;
         }
 
         .product-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 15px;
-            text-align: center;
-            border: 1px solid #eee;
-            transition: 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-        }
-
-        .img-box {
-            width: 100%;
-            height: 120px;
-            background: #fafafa;
-            border-radius: 10px;
-            margin-bottom: 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #eee;
+            transition: 0.3s;
         }
 
-        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .product-card:hover { border-color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        .product-name { font-size: 0.85em; font-weight: 600; height: 35px; line-height: 1.2; }
-        .product-price { color: var(--primary); font-weight: 900; font-size: 1.1em; margin: 8px 0; }
+        .product-info { margin-bottom: 10px; }
+        .product-name { font-size: 0.9em; font-weight: 600; color: #333; }
+        .product-price { color: var(--primary); font-weight: 900; font-size: 1em; }
 
         .qty-input {
-            width: 80%;
+            width: 100%;
             text-align: center;
             background: #f4f4f4;
             border: none;
@@ -150,7 +126,6 @@
             border-radius: 8px;
         }
 
-        /* --- LIQUIDACIÓN FLOTANTE --- */
         .drawer {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -190,12 +165,7 @@
 
 <div class="container">
     <div class="card">
-        <div id="reloj" class="reloj">Colombia: Cargando...</div>
-        
-        <div class="info-central">
-            📍 Frente al estadio de fútbol, Caucasia | 📱 WhatsApp: 3148648770
-        </div>
-
+        <div id="reloj" class="reloj">Colombia: --:--:--</div>
         <div class="client-inputs">
             <div class="field">
                 <label>Nombre del Cliente</label>
@@ -212,17 +182,17 @@
         </div>
     </div>
 
-    <div class="product-grid" id="grid"></div>
+    <div id="categorias-container"></div>
 
     <div class="card" style="margin-top: 25px;">
         <label style="font-size: 0.75em; font-weight: 700; color: #666; text-transform: uppercase;">📝 Observaciones</label>
-        <textarea id="obs" placeholder="Ej: Los aguacates que no estén muy maduros..."></textarea>
+        <textarea id="obs" placeholder="Ej: Los aguacates que no estén muy maduros..." style="margin-top:8px; height:80px;"></textarea>
     </div>
 </div>
 
 <div class="drawer">
     <div>
-        <div style="font-size: 0.8em; font-weight: 600; opacity: 0.9; text-transform: uppercase;">Valor Total</div>
+        <div style="font-size: 0.8em; font-weight: 600; opacity: 0.9; text-transform: uppercase;">Total Pedido</div>
         <div class="total-amount">$<span id="total-text">0</span></div>
     </div>
     <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP 🚀</button>
@@ -233,42 +203,61 @@
 </footer>
 
 <script>
-    // Control suscripcion invisible (vence 2027-01-01)
     if (new Date() > new Date(2027, 0, 1)) document.body.innerHTML = "";
 
-    const catalog = [
-        { n: "Ajo Kilo", p: 9580, img: "ajo.JPG" },
-        { n: "Agraz", p: 4500, img: "agraz.JPG" },
-        { n: "Aguacate Hass", p: 7980, img: "" },
-        { n: "Cebolla Roja", p: 5380, img: "" },
-        { n: "Papa Capira", p: 3780, img: "" },
-        { n: "Mora", p: 3700, img: "" },
-        { n: "Arroz Superarroz", p: 2100, img: "" },
-        { n: "Huevo Doble A", p: 17900, img: "" },
-        { n: "Cebolla Blanca", p: 3580, img: "" },
-        { n: "Zanahoria", p: 2780, img: "" },
-        { n: "Tomate Chonto", p: 6580, img: "" },
-        { n: "Piña Oro Miel", p: 5180, img: "" }
-    ];
+    const catalog = {
+        "Ramas y Verduras": [
+            { n: "Acelga", p: 5980 }, { n: "Ajo Kilo", p: 9580 }, { n: "Ajo Malla", p: 2000 },
+            { n: "Aji Dulce", p: 7980 }, { n: "Aji Picante", p: 19980 }, { n: "Albahaca", p: 19980 },
+            { n: "Apio", p: 2980 }, { n: "Arveja Vaina", p: 8980 }, { n: "Berenjena", p: 8980 },
+            { n: "Brocoli", p: 5980 }, { n: "Cebolla Blanca", p: 3580 }, { n: "Cebolla Roja", p: 5380 },
+            { n: "Cilantro", p: 8980 }, { n: "Habichuela", p: 7980 }, { n: "Lechuga Batavia", p: 3000 },
+            { n: "Papa Capira", p: 3780 }, { n: "Papa Criolla", p: 5980 }, { n: "Pepino", p: 5980 },
+            { n: "Pimenton", p: 6160 }, { n: "Tomate", p: 6580 }, { n: "Zanahoria", p: 2780 }
+        ],
+        "Frutas": [
+            { n: "Agraz", p: 4500 }, { n: "Aguacate Hass", p: 7980 }, { n: "Aguacate Papelillo", p: 15980 },
+            { n: "Banano Criollo", p: 600 }, { n: "Fresa Pequeña", p: 5700 }, { n: "Guanabana", p: 6980 },
+            { n: "Kiwwy", p: 23980 }, { n: "Limon Criollo", p: 2980 }, { n: "Lulo", p: 7580 },
+            { n: "Mora", p: 3700 }, { n: "Naranja Tangelo", p: 4380 }, { n: "Papaya", p: 4580 },
+            { n: "Piña Oro Miel", p: 5180 }, { n: "Pitaya", p: 8980 }, { n: "Uva Combinada", p: 5000 }
+        ],
+        "Granos y Víveres": [
+            { n: "Arroz", p: 2100 }, { n: "Azucar", p: 2100 }, { n: "Frijol Cargamanto", p: 7500 },
+            { n: "Lenteja", p: 3300 }, { n: "Aceite Palma", p: 9000 }, { n: "Huevos Doble A", p: 17900 },
+            { n: "Panela Redonda", p: 4900 }, { n: "Sal", p: 1900 }
+        ]
+    };
 
-    const grid = document.getElementById('grid');
-    catalog.forEach((item, index) => {
-        grid.innerHTML += `
-            <div class="product-card">
-                <div class="img-box">
-                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=${item.n}'">
+    const container = document.getElementById('categorias-container');
+    let globalIndex = 0;
+
+    for (const [categoria, productos] of Object.entries(catalog)) {
+        const section = document.createElement('div');
+        section.innerHTML = `<h3>${categoria}</h3><div class="product-grid" id="cat-${globalIndex}"></div>`;
+        container.appendChild(section);
+        const grid = document.getElementById(`cat-${globalIndex}`);
+
+        productos.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-info">
+                    <div class="product-name">${item.n}</div>
+                    <div class="product-price">$${item.p.toLocaleString()}</div>
                 </div>
-                <div class="product-name">${item.n}</div>
-                <div class="product-price">$${item.p.toLocaleString()}</div>
                 <input type="number" min="0" placeholder="0" class="qty-input" 
-                       data-index="${index}" oninput="liquidar()">
-            </div>`;
-    });
+                       data-nombre="${item.n}" data-precio="${item.p}" oninput="liquidar()">
+            `;
+            grid.appendChild(card);
+        });
+        globalIndex++;
+    }
 
     function liquidar() {
         let total = 0;
         document.querySelectorAll('.qty-input').forEach(input => {
-            total += (parseInt(input.value) || 0) * catalog[input.dataset.index].p;
+            total += (parseInt(input.value) || 0) * parseInt(input.dataset.precio);
         });
         document.getElementById('total-text').innerText = total.toLocaleString();
     }
@@ -278,27 +267,27 @@
         document.getElementById('reloj').innerText = "Colombia: " + d;
     }
     setInterval(actualizarReloj, 1000);
+    actualizarReloj();
 
     function enviarPedido() {
         const n = document.getElementById('nombre').value;
         const d = document.getElementById('direccion').value;
-        const c = document.getElementById('celular').value;
         if (!n || !d) return alert("Por favor, llena los datos de entrega.");
 
-        let factura = `🧾 *LA CENTRAL - PEDIDO*\n--------------------------\n👤 *Cliente:* ${n}\n📍 *Dir:* ${d}\n📞 *Tel:* ${c}\n📅 ${document.getElementById('reloj').innerText}\n\n🛒 *PRODUCTOS:*\n`;
+        let factura = `🧾 *LA CENTRAL - PEDIDO*\n--------------------------\n👤 *Cliente:* ${n}\n📍 *Dir:* ${d}\n📞 *Tel:* ${document.getElementById('celular').value}\n📅 ${document.getElementById('reloj').innerText}\n\n🛒 *PRODUCTOS:*\n`;
         let totalFinal = 0;
 
         document.querySelectorAll('.qty-input').forEach(input => {
             const cant = parseInt(input.value) || 0;
             if (cant > 0) {
-                const item = catalog[input.dataset.index];
-                factura += `▫️ ${item.n} x${cant} ($${(cant * item.p).toLocaleString()})\n`;
-                totalFinal += cant * item.p;
+                const sub = cant * parseInt(input.dataset.precio);
+                factura += `▫️ ${input.dataset.nombre} x${cant} ($${sub.toLocaleString()})\n`;
+                totalFinal += sub;
             }
         });
 
         if (totalFinal === 0) return alert("El carrito está vacío.");
-        factura += `\n💰 *TOTAL: $${totalFinal.toLocaleString()}*\n--------------------------\n📝 *OBS:* ${document.getElementById('obs').value || 'Ninguna'}\n\n_Desarrollado por vibras positivas_`;
+        factura += `\n💰 *TOTAL A PAGAR: $${totalFinal.toLocaleString()}*\n--------------------------\n📝 *OBS:* ${document.getElementById('obs').value || 'Ninguna'}\n\n_Desarrollado por vibras positivas_`;
         window.open(`https://wa.me/573148648770?text=${encodeURIComponent(factura)}`);
     }
 </script>
