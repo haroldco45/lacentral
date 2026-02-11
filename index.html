@@ -6,12 +6,7 @@
     <title>LA CENTRAL - Pedidos</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #2e7d32;
-            --secondary: #fdd835;
-            --accent: #ff9800;
-            --bg: #f8f9fa;
-        }
+        :root { --primary: #2e7d32; --secondary: #fdd835; --accent: #ff9800; --bg: #f8f9fa; }
         body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg); padding-bottom: 140px; }
         header { background: white; padding: 20px; text-align: center; border-bottom: 5px solid var(--primary); }
         .logo-img { max-width: 250px; height: auto; }
@@ -24,8 +19,7 @@
         input, textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
         .product-card { background: white; border-radius: 15px; padding: 15px; text-align: center; border: 1px solid #eee; }
-        .img-box { width: 100%; height: 120px; background: #fafafa; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .icon-box { width: 100%; height: 80px; background: #f0f0f0; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; font-size: 2em; }
         .drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--primary); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-radius: 30px 30px 0 0; }
         .total-amount { font-size: 2.5em; font-weight: 900; }
         .btn-whatsapp { background: var(--secondary); color: #333; border: none; padding: 15px 35px; border-radius: 15px; font-weight: 900; cursor: pointer; }
@@ -34,25 +28,16 @@
 <body>
 
 <header>
-    <img src="la-central.jpg" alt="LA CENTRAL" class="logo-img">
+    <img src="la-central.jpg" alt="LA CENTRAL" class="logo-img" onerror="this.alt='LA CENTRAL - Frutas y Verduras'">
 </header>
 
 <div class="container">
     <div class="card">
-        <div id="reloj" class="reloj">Cargando hora...</div>
+        <div id="reloj" class="reloj">Cargando hora de Colombia...</div>
         <div class="client-inputs">
-            <div class="field">
-                <label>Nombre del Cliente</label>
-                <input type="text" id="nombre" placeholder="Nombre completo">
-            </div>
-            <div class="field">
-                <label>Dirección de Entrega</label>
-                <input type="text" id="direccion" placeholder="Ej: Calle 10 #20-30">
-            </div>
-            <div class="field">
-                <label>Celular</label>
-                <input type="tel" id="celular" placeholder="3148648770">
-            </div>
+            <div class="field"><label>Nombre del Cliente</label><input type="text" id="nombre" placeholder="Nombre completo"></div>
+            <div class="field"><label>Dirección de Entrega</label><input type="text" id="direccion" placeholder="Ej: Calle 10 #20-30"></div>
+            <div class="field"><label>Celular</label><input type="tel" id="celular" placeholder="3148648770"></div>
         </div>
         <p style="margin-top: 10px; font-size: 0.8em; color: #666;">📍 Frente al estadio de fútbol, Caucasia | WhatsApp: 3148648770</p>
     </div>
@@ -60,16 +45,13 @@
     <div class="product-grid" id="grid"></div>
 
     <div class="card" style="margin-top: 25px;">
-        <label>📝 Observaciones</label>
-        <textarea id="obs" placeholder="Detalles adicionales del pedido..."></textarea>
+        <label>📝 Observaciones del Pedido</label>
+        <textarea id="obs" placeholder="Detalles adicionales (ej. los aguacates que no estén muy maduros)..."></textarea>
     </div>
 </div>
 
 <div class="drawer">
-    <div>
-        <div style="font-size: 0.8em;">TOTAL PEDIDO</div>
-        <div class="total-amount">$<span id="total-text">0</span></div>
-    </div>
+    <div><div style="font-size: 0.8em;">TOTAL PEDIDO</div><div class="total-amount">$<span id="total-text">0</span></div></div>
     <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP 🚀</button>
 </div>
 
@@ -78,27 +60,21 @@
 </footer>
 
 <script>
-    // Suscripción invisible (vence 2027-01-01)
-    if (new Date() > new Date(2027, 0, 1)) document.body.innerHTML = "";
-
+    // Catálogo completo extraído de las imágenes
     const catalog = [
-        { n: "Ajo Kilo", p: 9580, img: "ajo.JPG" },
-        { n: "Agraz", p: 4500, img: "agraz.JPG" },
-        { n: "Aguacate Hass", p: 7980, img: "" },
-        { n: "Cebolla Roja", p: 5380, img: "" },
-        { n: "Papa Capira", p: 3780, img: "" },
-        { n: "Mora", p: 3700, img: "" },
-        { n: "Arroz Superarroz", p: 2100, img: "" },
-        { n: "Huevo Doble A", p: 17900, img: "" }
+        { n: "Aguacate Hass", p: 7980, i: "🥑" }, { n: "Ajo Kilo", p: 9580, i: "🧄" },
+        { n: "Agraz", p: 4500, i: "🍇" }, { n: "Arveja Vaina", p: 8980, i: "🫛" },
+        { n: "Cebolla Roja", p: 5380, i: "🧅" }, { n: "Papa Capira", p: 3780, i: "🥔" },
+        { n: "Mora", p: 3700, i: "🫐" }, { n: "Piña Oro Miel", p: 5180, i: "🍍" },
+        { n: "Arroz Blanco", p: 2100, i: "🍚" }, { n: "Huevo Doble A", p: 17900, i: "🥚" },
+        { n: "Zanahoria", p: 2780, i: "🥕" }, { n: "Tomate Chonto", p: 6580, i: "🍅" }
     ];
 
     const grid = document.getElementById('grid');
     catalog.forEach((item, index) => {
         grid.innerHTML += `
             <div class="product-card">
-                <div class="img-box">
-                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Cargando...'">
-                </div>
+                <div class="icon-box">${item.i}</div>
                 <div style="font-size: 0.9em; font-weight: 600;">${item.n}</div>
                 <div style="color: var(--primary); font-weight: 900;">$${item.p.toLocaleString()}</div>
                 <input type="number" min="0" placeholder="0" class="qty" data-idx="${index}" oninput="calcular()" style="width: 80%; text-align: center; margin-top: 10px;">
@@ -118,7 +94,6 @@
         document.getElementById('reloj').innerText = "Colombia: " + d;
     }
     setInterval(actualizarReloj, 1000);
-    actualizarReloj();
 
     function enviarPedido() {
         const n = document.getElementById('nombre').value;
