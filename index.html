@@ -3,277 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LA CENTRAL - Pedidos Inteligentes</title>
+    <title>LA CENTRAL - Pedidos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2e7d32;
-            --primary-light: #4caf50;
             --secondary: #fdd835;
             --accent: #ff9800;
-            --white: #ffffff;
-            --gray: #f4f7f6;
+            --bg: #f0f2f5;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            background-color: var(--gray);
-            padding-bottom: 120px; /* Espacio para el cajón de liquidación */
+            background-color: var(--bg);
+            padding-bottom: 140px;
         }
 
-        /* --- LOGO MEJORADO --- */
-        .header-logo {
+        /* --- LOGO Y HEADER --- */
+        header {
             background: white;
-            padding: 30px 10px;
             text-align: center;
+            padding: 25px 10px;
             border-bottom: 6px solid var(--primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .logo-container {
+        .logo-box {
             display: inline-block;
-            border: 3px solid var(--primary);
-            padding: 10px 25px;
-            border-radius: 50px 0 50px 0;
-            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border: 4px solid var(--primary);
+            padding: 10px 30px;
+            border-radius: 60px 5px;
+            background: #fff;
         }
 
-        .logo-text-top {
-            font-size: 2.2em;
-            font-weight: 900;
-            color: var(--primary);
-            margin: 0;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        .logo-main { font-size: 2.5em; font-weight: 900; color: var(--primary); margin: 0; line-height: 1; }
+        .logo-sub { font-size: 1.1em; color: var(--accent); margin: 0; font-weight: 600; letter-spacing: 3px; }
 
-        .logo-text-bottom {
-            font-size: 1em;
-            color: var(--accent);
-            margin: 0;
-            font-weight: 600;
-            letter-spacing: 4px;
-        }
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
 
-        /* --- CONTENEDOR PRINCIPAL --- */
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 15px;
+        .info-card {
+            background: white;
             padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 15px;
             margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
-        .reloj-vibras {
-            color: var(--primary);
-            font-weight: bold;
-            text-align: right;
-            font-size: 0.9em;
-        }
+        .reloj { color: var(--primary); font-weight: 600; text-align: right; margin-bottom: 10px; }
 
-        /* --- GRILLA DE PRODUCTOS --- */
+        /* --- GRILLA --- */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
         }
 
         .product-card {
             background: white;
             border-radius: 12px;
-            border: 1px solid #eee;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            transition: 0.3s;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary-light);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-color: var(--primary); }
 
         .product-img {
             width: 100%;
-            height: 130px;
+            height: 110px;
             object-fit: cover;
             border-radius: 8px;
             background: #f9f9f9;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .price-tag {
-            color: var(--primary);
-            font-size: 1.2em;
-            font-weight: 700;
-            margin: 5px 0;
-        }
+        .product-name { font-size: 0.9em; font-weight: 600; height: 40px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .product-price { color: var(--primary); font-weight: 900; font-size: 1.1em; margin: 5px 0; }
 
         input[type="number"] {
-            width: 80%;
+            width: 90%;
             padding: 8px;
             border: 2px solid #ddd;
             border-radius: 8px;
             text-align: center;
-            font-size: 1em;
+            font-size: 1.1em;
+            font-weight: 600;
         }
 
-        /* --- CAJÓN DE LIQUIDACIÓN FLOTANTE --- */
-        .liquidation-drawer {
+        /* --- BARRA TOTAL --- */
+        .drawer {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: var(--primary);
             color: white;
-            padding: 15px 25px;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            border-radius: 25px 25px 0 0;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
-            z-index: 2000;
-            border-radius: 20px 20px 0 0;
         }
 
-        .total-info h2 { margin: 0; font-size: 1.1em; opacity: 0.9; }
-        .total-amount { font-size: 2em; font-weight: 800; }
+        .total-box h2 { margin: 0; font-size: 0.9em; text-transform: uppercase; opacity: 0.8; }
+        .total-box div { font-size: 2.2em; font-weight: 900; }
 
-        .btn-order {
+        .btn-send {
             background: var(--secondary);
             color: #333;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            font-weight: bold;
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1em;
             cursor: pointer;
-            transition: 0.2s;
+            box-shadow: 0 4px 0 #c7a500;
         }
 
-        .btn-order:hover { transform: scale(1.05); background: #fbc02d; }
+        .btn-send:active { transform: translateY(4px); box-shadow: none; }
 
-        .footer-tag {
-            text-align: center;
-            font-size: 0.8em;
-            color: #777;
-            margin-top: 30px;
-        }
+        footer { text-align: center; padding: 20px; font-size: 0.8em; color: #888; }
     </style>
 </head>
 <body>
 
-<div class="header-logo">
-    <div class="logo-container">
-        <p class="logo-text-top">La Central</p>
-        <p class="logo-text-bottom">FRUTAS & VERDURAS</p>
+<header>
+    <div class="logo-box">
+        <p class="logo-main">LA CENTRAL</p>
+        <p class="logo-sub">FRUTAS & VERDURAS</p>
     </div>
-</div>
+</header>
 
 <div class="container">
-    <div class="card">
-        <div id="reloj" class="reloj-vibras">Colombia: Cargando...</div>
-        <p><strong>📍 Frente al Estadio de Fútbol, Caucasia</strong></p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <input type="text" id="nombre" placeholder="Nombre completo">
-            <input type="text" id="direccion" placeholder="Dirección exacta">
+    <div class="info-card">
+        <div id="reloj" class="reloj">Colombia: --:--:--</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" id="nombre" placeholder="Nombre del Cliente">
+            <input type="text" id="direccion" placeholder="Dirección en Caucasia">
+        </div>
+        <div style="margin-top: 10px;">
+            <small>📍 Frente al estadio de fútbol</small>
         </div>
     </div>
 
-    <div class="product-grid" id="lista-productos">
-        </div>
+    <div class="product-grid" id="grid"></div>
 
-    <div class="card" style="margin-top: 20px;">
-        <textarea id="obs" placeholder="Observaciones (ej. tomates verdes, piña madura...)" style="width:100%; border-radius:10px; padding:10px; border:1px solid #ddd;"></textarea>
-    </div>
-
-    <div class="footer-tag">
-        Desarrollado por <strong>Vibras Positivas</strong> © Derechos Reservados
+    <div class="info-card" style="margin-top: 20px;">
+        <textarea id="obs" placeholder="Observaciones: (ej. Los aguacates que no estén muy maduros...)" style="width:100%; height:80px; padding:10px; border-radius:10px; border:1px solid #ddd;"></textarea>
     </div>
 </div>
 
-<div class="liquidation-drawer">
-    <div class="total-info">
-        <h2>Total de su pedido:</h2>
-        <div class="total-amount">$<span id="total-valor">0</span></div>
+<div class="drawer">
+    <div class="total-box">
+        <h2>Total del Pedido</h2>
+        <div id="total-text">$0</div>
     </div>
-    <button class="btn-order" onclick="enviarWhatsApp()">ENVIAR PEDIDO 🚀</button>
+    <button class="btn-send" onclick="enviarPedido()">ENVIAR PEDIDO 🚀</button>
 </div>
+
+<footer>
+    Desarrollado por <strong>vibras positivas</strong> © Derechos Reservados
+</footer>
 
 <script>
-    // --- CONTROL DE SUSCRIPCIÓN ---
-    const _exp = new Date(2027, 0, 1);
-    if (new Date() > _exp) document.body.innerHTML = "Suscripción Vencida.";
+    // --- CONTROL DE VENCIMIENTO ---
+    const _expire = new Date(2027, 0, 1);
+    if (new Date() > _expire) document.body.innerHTML = "Suscripción Expirada.";
 
-    // --- PRODUCTOS CON FOTOS ---
-    // NOTA: Cambia "nombre-de-la-foto.jpg" por el nombre real de tus archivos
-    const productos = [
+    // --- CATÁLOGO EXTRACTO DE LAS IMÁGENES ---
+    const catalog = [
+        // FRUTAS
         { n: "Aguacate Hass", p: 7980, img: "aguacate_hass.jpg" },
-        { n: "Arveja Vaina", p: 8980, img: "arveja.jpg" },
-        { n: "Cebolla Roja", p: 5380, img: "cebolla_roja.jpg" },
-        { n: "Papa Capira", p: 3780, img: "papa.jpg" },
+        { n: "Aguacate Papelillo", p: 15980, img: "aguacate_papelillo.jpg" },
+        { n: "Banano Criollo", p: 600, img: "banano.jpg" },
+        { n: "Fresa Grande", p: 5700, img: "fresa.jpg" },
+        { n: "Guanábana", p: 6980, img: "guanabana.jpg" },
+        { n: "Kiwi", p: 23980, img: "kiwi.jpg" },
+        { n: "Limon Criollo", p: 2980, img: "limon.jpg" },
+        { n: "Lulo", p: 7580, img: "lulo.jpg" },
+        { n: "Mango Tomy", p: 4980, img: "mango.jpg" },
+        { n: "Manzana Roja", p: 2500, img: "manzana_roja.jpg" },
+        { n: "Mora", p: 3700, img: "mora.jpg" },
+        { n: "Naranja Tangelo", p: 4380, img: "naranja.jpg" },
         { n: "Piña Oro Miel", p: 5180, img: "pina.jpg" },
-        { n: "Huevo Doble A", p: 17900, img: "huevos.jpg" },
-        { n: "Superarroz", p: 2100, img: "arroz.jpg" },
-        { n: "Vistahermosa", p: 3000, img: "vistahermosa.jpg" }
+        { n: "Pitaya", p: 8980, img: "pitaya.jpg" },
+        { n: "Uva Isabela", p: 4500, img: "uva.jpg" },
+
+        // VERDURAS / RAMAS
+        { n: "Acelga", p: 5980, img: "acelga.jpg" },
+        { n: "Ajo Kilo", p: 9580, img: "ajo.jpg" },
+        { n: "Apio", p: 2980, img: "apio.jpg" },
+        { n: "Arveja Vaina", p: 8980, img: "arveja.jpg" },
+        { n: "Brocoli", p: 5980, img: "brocoli.jpg" },
+        { n: "Cebolla Blanca", p: 3580, img: "cebolla_blanca.jpg" },
+        { n: "Cebolla Roja", p: 5380, img: "cebolla_roja.jpg" },
+        { n: "Cilantro", p: 8980, img: "cilantro.jpg" },
+        { n: "Espinaca", p: 7980, img: "espinaca.jpg" },
+        { n: "Habichuela", p: 7980, img: "habichuela.jpg" },
+        { n: "Lechuga Batavia", p: 3000, img: "lechuga.jpg" },
+        { n: "Papa Capira", p: 3780, img: "papa_capira.jpg" },
+        { n: "Papa Criolla", p: 5980, img: "papa_criolla.jpg" },
+        { n: "Pepino", p: 5980, img: "pepino.jpg" },
+        { n: "Pimenton", p: 6160, img: "pimenton.jpg" },
+        { n: "Tomate Chonto", p: 6580, img: "tomate.jpg" },
+        { n: "Zanahoria", p: 2780, img: "zanahoria.jpg" },
+
+        // VIVERES / GRANOS
+        { n: "Arroz Blanco", p: 2100, img: "arroz.jpg" },
+        { n: "Huevos Doble A", p: 17900, img: "huevos.jpg" },
+        { n: "Aceite Palma", p: 9000, img: "aceite.jpg" },
+        { n: "Panela Redonda", p: 4900, img: "panela.jpg" },
+        { n: "Lenteja", p: 3300, img: "lenteja.jpg" },
+        { n: "Frijol Cargamanto", p: 7500, img: "frijol.jpg" }
     ];
 
-    const grid = document.getElementById('lista-productos');
+    const grid = document.getElementById('grid');
 
-    productos.forEach((p, i) => {
+    catalog.forEach((item, index) => {
         grid.innerHTML += `
             <div class="product-card">
-                <img src="${p.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Fruta'">
-                <div style="font-weight:bold;">${p.n}</div>
-                <div class="price-tag">$${p.p.toLocaleString()}</div>
-                <input type="number" min="0" placeholder="0" class="cant-input" data-precio="${p.p}" data-nombre="${p.n}" oninput="liquidar()">
+                <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=${item.n}'">
+                <div class="product-name">${item.n}</div>
+                <div class="product-price">$${item.p.toLocaleString()}</div>
+                <input type="number" min="0" placeholder="0" class="cant-input" 
+                       data-index="${index}" oninput="calcular()">
             </div>
         `;
     });
 
-    function liquidar() {
+    function calcular() {
         let total = 0;
         document.querySelectorAll('.cant-input').forEach(input => {
-            let c = parseInt(input.value) || 0;
-            total += c * parseInt(input.dataset.precio);
+            const cant = parseInt(input.value) || 0;
+            total += cant * catalog[input.dataset.index].p;
         });
-        document.getElementById('total-valor').innerText = total.toLocaleString();
+        document.getElementById('total-text').innerText = "$" + total.toLocaleString();
     }
 
     function actualizarReloj() {
-        const opciones = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' };
-        document.getElementById('reloj').innerText = "Colombia: " + new Date().toLocaleString('es-CO', opciones);
+        const time = new Date().toLocaleString("es-CO", { timeZone: "America/Bogota", hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' });
+        document.getElementById('reloj').innerText = "Colombia: " + time;
     }
     setInterval(actualizarReloj, 1000);
-    actualizarReloj();
 
-    function enviarWhatsApp() {
+    function enviarPedido() {
         const nombre = document.getElementById('nombre').value;
         const dir = document.getElementById('direccion').value;
-        if(!nombre || !dir) return alert("Por favor llena nombre y dirección");
+        if (!nombre || !dir) return alert("Por favor completa tus datos.");
 
-        let detalle = "";
+        let texto = `🧾 *LA CENTRAL - NUEVO PEDIDO*\n--------------------------\n👤 *Cliente:* ${nombre}\n📍 *Dir:* ${dir}\n\n🛒 *PRODUCTOS:*\n`;
         let totalFinal = 0;
+
         document.querySelectorAll('.cant-input').forEach(input => {
-            let c = parseInt(input.value) || 0;
-            if(c > 0) {
-                let sub = c * parseInt(input.dataset.precio);
-                detalle += `• ${input.dataset.nombre} x${c} ($${sub.toLocaleString()})\n`;
+            const cant = parseInt(input.value) || 0;
+            if (cant > 0) {
+                const item = catalog[input.dataset.index];
+                const sub = cant * item.p;
+                texto += `▫️ ${item.n} x${cant} ($${sub.toLocaleString()})\n`;
                 totalFinal += sub;
             }
         });
 
-        if(totalFinal === 0) return alert("El pedido está vacío");
-
-        const msj = `🧾 *LA CENTRAL - FACTURA*\n--------------------------\n👤 *Cliente:* ${nombre}\n📍 *Dir:* ${dir}\n\n🛒 *PRODUCTOS:*\n${detalle}\n💰 *TOTAL: $${totalFinal.toLocaleString()}*\n--------------------------\n_Enviado desde App LA CENTRAL_`;
-        window.open(`https://wa.me/573148648770?text=${encodeURIComponent(msj)}`);
+        if (totalFinal === 0) return alert("El carrito está vacío.");
+        
+        texto += `\n💰 *TOTAL A PAGAR: $${totalFinal.toLocaleString()}*\n--------------------------\n📝 *OBS:* ${document.getElementById('obs').value || 'Ninguna'}\n\n_Generado por App LA CENTRAL_`;
+        
+        window.open(`https://wa.me/573148648770?text=${encodeURIComponent(texto)}`);
     }
 </script>
-
 </body>
 </html>
