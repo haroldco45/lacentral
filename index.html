@@ -54,6 +54,7 @@
                 <input type="tel" id="celular" placeholder="3148648770">
             </div>
         </div>
+        <p style="margin-top: 10px; font-size: 0.8em; color: #666;">📍 Frente al estadio de fútbol, Caucasia | WhatsApp: 3148648770</p>
     </div>
 
     <div class="product-grid" id="grid"></div>
@@ -77,7 +78,7 @@
 </footer>
 
 <script>
-    // Control de suscripción invisible (Ejemplo: Vence en 2027)
+    // Suscripción invisible (vence 2027-01-01)
     if (new Date() > new Date(2027, 0, 1)) document.body.innerHTML = "";
 
     const catalog = [
@@ -96,7 +97,7 @@
         grid.innerHTML += `
             <div class="product-card">
                 <div class="img-box">
-                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Sin+Foto'">
+                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Cargando...'">
                 </div>
                 <div style="font-size: 0.9em; font-weight: 600;">${item.n}</div>
                 <div style="color: var(--primary); font-weight: 900;">$${item.p.toLocaleString()}</div>
@@ -117,6 +118,7 @@
         document.getElementById('reloj').innerText = "Colombia: " + d;
     }
     setInterval(actualizarReloj, 1000);
+    actualizarReloj();
 
     function enviarPedido() {
         const n = document.getElementById('nombre').value;
