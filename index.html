@@ -12,175 +12,23 @@
             --accent: #ff9800;
             --bg: #f8f9fa;
         }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            background-color: var(--bg);
-            padding-bottom: 140px;
-        }
-
-        /* --- HEADER --- */
-        header {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .logo-img {
-            max-width: 280px;
-            height: auto;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        /* --- DATOS CLIENTE --- */
-        .card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-        }
-
-        .reloj {
-            color: var(--primary);
-            font-weight: 600;
-            text-align: right;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-        }
-
-        .info-central {
-            background: #e8f5e9;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.85em;
-            color: #333;
-            border-left: 5px solid var(--primary);
-        }
-
-        .client-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-        }
-
-        @media (max-width: 768px) {
-            .client-inputs { grid-template-columns: 1fr; }
-        }
-
-        .field label {
-            font-size: 0.75em;
-            font-weight: 700;
-            color: #666;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9em;
-            box-sizing: border-box;
-        }
-
-        input:focus { border-color: var(--primary); outline: none; }
-
-        /* --- GRILLA PRODUCTOS --- */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-            gap: 15px;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            border: 1px solid #eee;
-            transition: 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-        }
-
-        .img-box {
-            width: 100%;
-            height: 120px;
-            background: #fafafa;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
+        body { font-family: 'Poppins', sans-serif; margin: 0; background-color: var(--bg); padding-bottom: 140px; }
+        header { background: white; padding: 20px; text-align: center; border-bottom: 5px solid var(--primary); }
+        .logo-img { max-width: 250px; height: auto; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; border-radius: 15px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .reloj { color: var(--primary); font-weight: 600; text-align: right; font-size: 0.9em; margin-bottom: 15px; }
+        .client-inputs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        @media (max-width: 768px) { .client-inputs { grid-template-columns: 1fr; } }
+        .field label { font-size: 0.75em; font-weight: 700; color: #666; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        input, textarea { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 15px; }
+        .product-card { background: white; border-radius: 15px; padding: 15px; text-align: center; border: 1px solid #eee; }
+        .img-box { width: 100%; height: 120px; background: #fafafa; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-
-        .product-name { font-size: 0.85em; font-weight: 600; height: 35px; line-height: 1.2; }
-        .product-price { color: var(--primary); font-weight: 900; font-size: 1.1em; margin: 8px 0; }
-
-        .qty-input {
-            width: 80%;
-            text-align: center;
-            background: #f4f4f4;
-            border: none;
-            font-weight: 900;
-            color: var(--primary);
-            padding: 8px;
-            border-radius: 8px;
-        }
-
-        /* --- LIQUIDACIÓN FLOTANTE --- */
-        .drawer {
-            position: fixed;
-            bottom: 0; left: 0; right: 0;
-            background: var(--primary);
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            border-radius: 30px 30px 0 0;
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.2);
-        }
-
-        .total-label { font-size: 0.8em; font-weight: 600; opacity: 0.9; text-transform: uppercase; }
+        .drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--primary); color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; border-radius: 30px 30px 0 0; }
         .total-amount { font-size: 2.5em; font-weight: 900; }
-
-        .btn-whatsapp {
-            background: var(--secondary);
-            color: #333;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 15px;
-            font-weight: 900;
-            font-size: 1.1em;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #d4b400;
-        }
-
-        .btn-whatsapp:active { transform: translateY(3px); box-shadow: none; }
-
-        footer { text-align: center; padding: 25px; font-size: 0.8em; color: #999; }
+        .btn-whatsapp { background: var(--secondary); color: #333; border: none; padding: 15px 35px; border-radius: 15px; font-weight: 900; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -191,12 +39,7 @@
 
 <div class="container">
     <div class="card">
-        <div id="reloj" class="reloj">Colombia: --:--:--</div>
-        
-        <div class="info-central">
-            📍 Frente al estadio de fútbol, Caucasia | 📱 WhatsApp: 3148648770
-        </div>
-
+        <div id="reloj" class="reloj">Cargando hora...</div>
         <div class="client-inputs">
             <div class="field">
                 <label>Nombre del Cliente</label>
@@ -204,11 +47,11 @@
             </div>
             <div class="field">
                 <label>Dirección de Entrega</label>
-                <input type="text" id="direccion" placeholder="Ej: Barrio Centro Calle 10">
+                <input type="text" id="direccion" placeholder="Ej: Calle 10 #20-30">
             </div>
             <div class="field">
-                <label>Celular / WhatsApp</label>
-                <input type="tel" id="celular" placeholder="Número de contacto">
+                <label>Celular</label>
+                <input type="tel" id="celular" placeholder="3148648770">
             </div>
         </div>
     </div>
@@ -216,105 +59,84 @@
     <div class="product-grid" id="grid"></div>
 
     <div class="card" style="margin-top: 25px;">
-        <label style="font-size: 0.75em; font-weight: 700; color: #666; text-transform: uppercase;">📝 Observaciones</label>
-        <textarea id="obs" placeholder="Ej: Los aguacates que estén maduros, por favor..." style="margin-top:8px; height:80px;"></textarea>
+        <label>📝 Observaciones</label>
+        <textarea id="obs" placeholder="Detalles adicionales del pedido..."></textarea>
     </div>
 </div>
 
 <div class="drawer">
     <div>
-        <div class="total-label">Valor Total del Pedido</div>
+        <div style="font-size: 0.8em;">TOTAL PEDIDO</div>
         <div class="total-amount">$<span id="total-text">0</span></div>
     </div>
-    <button class="btn-whatsapp" onclick="enviarPedido()">ENVIAR POR WHATSAPP 🚀</button>
+    <button class="btn-whatsapp" onclick="enviarPedido()">PEDIR POR WHATSAPP 🚀</button>
 </div>
 
 <footer>
-    Desarrollado por <strong>vibras positivas</strong> © Derechos Reservados
+    <center><p>Desarrollado por <b>vibras positivas</b> © Derechos Reservados</p></center>
 </footer>
 
 <script>
-    // --- CONTROL DE SUSCRIPCIÓN INVISIBLE ---
-    const _expire = new Date(2027, 0, 1);
-    if (new Date() > _expire) document.body.innerHTML = "";
+    // Control de suscripción invisible (Ejemplo: Vence en 2027)
+    if (new Date() > new Date(2027, 0, 1)) document.body.innerHTML = "";
 
-    // --- CATÁLOGO DE PRODUCTOS (Extraído de tus fotos) ---
     const catalog = [
         { n: "Ajo Kilo", p: 9580, img: "ajo.JPG" },
         { n: "Agraz", p: 4500, img: "agraz.JPG" },
-        { n: "Aguacate Hass", p: 7980, img: "aguacate.jpg" },
-        { n: "Arveja Vaina", p: 8980, img: "arveja.jpg" },
-        { n: "Cebolla Blanca", p: 3580, img: "cebolla_b.jpg" },
-        { n: "Cebolla Roja", p: 5380, img: "cebolla_r.jpg" },
-        { n: "Frijol Verde", p: 5500, img: "frijol.jpg" },
-        { n: "Habichuela", p: 7980, img: "habichuela.jpg" },
-        { n: "Papa Capira", p: 3780, img: "papa.jpg" },
-        { n: "Papa Criolla", p: 5980, img: "papa_c.jpg" },
-        { n: "Arroz Superarroz", p: 2100, img: "arroz_s.jpg" },
-        { n: "Arroz Vistahermosa", p: 3000, img: "arroz_v.jpg" },
-        { n: "Huevo Doble A", p: 17900, img: "huevo.jpg" },
-        { n: "Aceite Palma", p: 9000, img: "aceite.jpg" },
-        { n: "Panela Redonda", p: 4900, img: "panela.jpg" }
+        { n: "Aguacate Hass", p: 7980, img: "" },
+        { n: "Cebolla Roja", p: 5380, img: "" },
+        { n: "Papa Capira", p: 3780, img: "" },
+        { n: "Mora", p: 3700, img: "" },
+        { n: "Arroz Superarroz", p: 2100, img: "" },
+        { n: "Huevo Doble A", p: 17900, img: "" }
     ];
 
     const grid = document.getElementById('grid');
-
-    // Cargar productos
     catalog.forEach((item, index) => {
         grid.innerHTML += `
             <div class="product-card">
                 <div class="img-box">
-                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=${item.n}'">
+                    <img src="${item.img}" class="product-img" onerror="this.src='https://via.placeholder.com/150?text=Sin+Foto'">
                 </div>
-                <div class="product-name">${item.n}</div>
-                <div class="product-price">$${item.p.toLocaleString()}</div>
-                <input type="number" min="0" placeholder="0" class="qty-input" 
-                       data-index="${index}" oninput="liquidar()">
-            </div>
-        `;
+                <div style="font-size: 0.9em; font-weight: 600;">${item.n}</div>
+                <div style="color: var(--primary); font-weight: 900;">$${item.p.toLocaleString()}</div>
+                <input type="number" min="0" placeholder="0" class="qty" data-idx="${index}" oninput="calcular()" style="width: 80%; text-align: center; margin-top: 10px;">
+            </div>`;
     });
 
-    // Liquidación automática
-    function liquidar() {
-        let total = 0;
-        document.querySelectorAll('.qty-input').forEach(input => {
-            total += (parseInt(input.value) || 0) * catalog[input.dataset.index].p;
+    function calcular() {
+        let t = 0;
+        document.querySelectorAll('.qty').forEach(i => {
+            t += (parseInt(i.value) || 0) * catalog[i.dataset.idx].p;
         });
-        document.getElementById('total-text').innerText = total.toLocaleString();
+        document.getElementById('total-text').innerText = t.toLocaleString();
     }
 
-    // Reloj Real Colombia
     function actualizarReloj() {
-        const opciones = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' };
-        document.getElementById('reloj').innerText = "Colombia: " + new Date().toLocaleString('es-CO', opciones);
+        const d = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
+        document.getElementById('reloj').innerText = "Colombia: " + d;
     }
     setInterval(actualizarReloj, 1000);
-    actualizarReloj();
 
-    // Enviar Factura a WhatsApp
     function enviarPedido() {
-        const nombre = document.getElementById('nombre').value;
-        const dir = document.getElementById('direccion').value;
-        const cel = document.getElementById('celular').value;
-        
-        if (!nombre || !dir) return alert("Por favor, ingresa los datos de entrega.");
+        const n = document.getElementById('nombre').value;
+        const d = document.getElementById('direccion').value;
+        const c = document.getElementById('celular').value;
+        if (!n || !d) return alert("Por favor, llena los datos de contacto.");
 
-        let factura = `🧾 *LA CENTRAL - PEDIDO*\n--------------------------\n👤 *Cliente:* ${nombre}\n📍 *Dir:* ${dir}\n📱 *Tel:* ${cel}\n📅 ${document.getElementById('reloj').innerText}\n\n🛒 *PRODUCTOS:*\n`;
-        let totalFinal = 0;
-
-        document.querySelectorAll('.qty-input').forEach(input => {
-            const cant = parseInt(input.value) || 0;
+        let msg = `🧾 *LA CENTRAL - PEDIDO*\n👤 *Cliente:* ${n}\n📍 *Dir:* ${d}\n📞 *Tel:* ${c}\n\n🛒 *PRODUCTOS:*\n`;
+        let total = 0;
+        document.querySelectorAll('.qty').forEach(i => {
+            const cant = parseInt(i.value) || 0;
             if (cant > 0) {
-                const item = catalog[input.dataset.index];
-                factura += `▫️ ${item.n} x${cant} ($${(cant * item.p).toLocaleString()})\n`;
-                totalFinal += cant * item.p;
+                const item = catalog[i.dataset.idx];
+                msg += `▫️ ${item.n} x${cant} ($${(cant * item.p).toLocaleString()})\n`;
+                total += cant * item.p;
             }
         });
-
-        if (totalFinal === 0) return alert("El carrito está vacío.");
-        factura += `\n💰 *TOTAL A PAGAR: $${totalFinal.toLocaleString()}*\n--------------------------\n📝 *OBS:* ${document.getElementById('obs').value || 'Ninguna'}\n\n_Desarrollado por vibras positivas_`;
-
-        window.open(`https://wa.me/573148648770?text=${encodeURIComponent(factura)}`);
+        if (total === 0) return alert("El carrito está vacío.");
+        msg += `\n💰 *TOTAL: $${total.toLocaleString()}*\n\n_Desarrollado por vibras positivas_`;
+        window.open(`https://wa.me/573148648770?text=${encodeURIComponent(msg)}`);
     }
 </script>
 </body>
